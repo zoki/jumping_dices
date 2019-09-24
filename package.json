@@ -1,0 +1,24 @@
+{
+  "name": "jumping_dices",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Zoran Žabčić <zoran@effectiva.hr>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-middleware": "^3.7.1"
+  },
+  "dependencies": {
+    "mithril": "^2.0.4"
+  }
+}

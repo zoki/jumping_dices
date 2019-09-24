@@ -1,0 +1,77 @@
+:root {
+  --color-0: whitesmoke;
+  --color-1: #08C9DD;
+  --color-2: #5150EB;
+  --color-3: #F47171;
+  --color-4: #9B3535;
+  --color-5: #F7DF45;
+
+  --rows: 0;
+  --cols: 0;
+
+  --cube-size: 100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial";
+  background-color: whitesmoke;
+}
+
+.game {
+  padding: 20px;
+}
+
+.info {
+  font-size: 20px;
+  text-align: center;
+  padding: 40px;
+}
+
+.board {
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: calc(var(--cube-size) * var(--cols));
+}
+.cube {
+  width: var(--cube-size);
+  height: var(--cube-size);
+  color: white;
+  font-size: 20px;
+  line-height: 100px;
+  text-align: center;
+  border: 2px solid var(--color-0);
+  border-radius: 8px;
+  background: #ccc;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.cube.blank {
+  background: var(--color-0);
+}
+
+.cube:hover {
+  opacity: 0.7;
+}
+
+
+.cube.player-1 { background: var(--color-1); }
+.cube.player-2 { background: var(--color-2); }
+.cube.player-3 { background: var(--color-3); }
+.cube.player-4 { background: var(--color-4); }
+.cube.player-5 { background: var(--color-5); }
+
+
+.cube.debug {
+  padding: 10px;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: left;
+  /*background: #555;*/
+}
