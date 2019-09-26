@@ -9,6 +9,7 @@ export default class Board {
     this.cubes = []
     this.el = document.createElement("div")
     this.render()
+    console.log('maximumTotal', this.maximumTotal());
   }
 
   findCube(value) {
@@ -21,6 +22,10 @@ export default class Board {
 
   total() {
     return this.cubes.reduce( (sum, cube) => sum + cube.value, 0 )
+  }
+
+  maximumTotal(){
+    return this.cubes.reduce( (sum, cube) => sum + cube.maximumValue, 0 )
   }
 
   render() {
