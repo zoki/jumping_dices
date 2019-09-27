@@ -32,16 +32,15 @@ export default class Cube {
   }
 
   update() {
-    if (this.board.game.isEnd() ) { return }
-
-
     console.log("cube id", this.id)
     this.player = this.board.game.currentPlayer
     this.value++
+    this.render()
+
+    if (this.board.game.isEnd() ) { return }
 
     if (this.overload()) { this.updateNeighbours() }
     this.render()
-
   }
 
   updateNeighbours() {
@@ -56,7 +55,7 @@ export default class Cube {
   }
 
   overload() {
-    return this.value > this.neighbours.length
+    return this.value > this.maximumValue;
   }
 
   render() {
@@ -69,6 +68,10 @@ export default class Cube {
   debug() {
     this.el.classList.add("debug")
     return `value: ${this.value}<br>x-y: ${this.x}-${this.y}<br>n: ${this.neighbourIds.join()}`
+  }
+
+  get maximumValue(){
+    return this.neighbours.length;
   }
 
   get neighbours() {
