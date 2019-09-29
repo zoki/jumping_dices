@@ -1,5 +1,8 @@
 import Game from './models/game';
 
-// numPlayers, rows, cols, includeBlank
-const game = new Game(2, 4, 4, false);
-console.log('players', game.players);
+new Game({
+  numPlayers: 2,
+  rows: 4,
+  cols: 4,
+  includeBlank: false,
+});

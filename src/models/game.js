@@ -1,7 +1,7 @@
 import Board from './board';
 
 export default class Game {
-  constructor(numPlayers, rows, cols, includeBlank) {
+  constructor({ numPlayers, rows, cols, includeBlank }) {
     this.currentPlayer = 1;
     this.players = [...Array(++numPlayers).keys()].slice(1);
     this.el = document.createElement('div');
