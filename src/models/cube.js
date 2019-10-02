@@ -1,11 +1,13 @@
 export default class Cube {
-  constructor(id, x, y, blank, board) {
+  constructor({
+    x, y, value, blank, board, player,
+  }) {
+    this.id = `${x}-${y}`;
     this.blank = blank;
-    this.value = 0;
+    this.value = value || 0;
     this.x = x;
     this.y = y;
-    this.player = undefined;
-    this.id = id;
+    this.player = player;
     this.neighbourIds = [];
     this._neighbours = [];
     this.el = document.createElement('div');
@@ -14,11 +16,17 @@ export default class Cube {
     this.setNeighbourIds();
   }
 
+  get state() {
+    return {
+      x: this.x, y: this.y, value: this.value, blank: this.blank, player: this.player,
+    };
+  }
+
   setElement() {
     this.el.classList.add('cube');
     if (this.blank) { this.el.classList.add('blank'); }
     this.el.dataset.id = this.id;
-    this.el.addEventListener('click', (e) => this.move());
+    this.el.addEventListener('click', () => this.move());
     this.render();
   }
 
@@ -63,6 +71,7 @@ export default class Cube {
     if (this.value > 0) { this.el.classList.add(`player-${this.player}`); }
     if (!this.blank) this.el.innerHTML = this.value.toString(10);
     // this.el.innerHTML = this.debug()
+    return this;
   }
 
   debug() {
@@ -86,31 +95,20 @@ export default class Cube {
   }
 
   setNeighbourIds() {
-    let x; let y; let
-      id;
+    const { x, y, neighbourIds } = this;
+    const maxBottom = this.board.cols + 1;
+    const maxRight = this.board.rows + 1;
 
-    // same row before
-    x = this.x;
-    y = this.y - 1;
-    id = parseInt(`${x}${y}`, 10);
-    if (y > 0) { this.neighbourIds.push(id); }
+    // Top / same row before
+    y > 0 && neighbourIds.push(`${x}-${y - 1}`);
 
-    // same row after
-    x = this.x;
-    y = this.y + 1;
-    id = parseInt(`${x}${y}`, 10);
-    if (y < this.board.cols + 1) { this.neighbourIds.push(id); }
+    // Bottom / same row after
+    y < maxBottom && neighbourIds.push(`${x}-${y + 1}`);
 
-    // same column before
-    x = this.x - 1;
-    y = this.y;
-    id = parseInt(`${x}${y}`, 10);
-    if (x > 0) { this.neighbourIds.push(id); }
+    // Left / same column before
+    x > 0 && neighbourIds.push(`${x - 1}-${y}`);
 
-    // same column after
-    x = this.x + 1;
-    y = this.y;
-    id = parseInt(`${x}${y}`, 10);
-    if (x < this.board.rows + 1) { this.neighbourIds.push(id); }
+    // Right / same column after
+    x < maxRight && neighbourIds.push(`${x + 1}-${y}`);
   }
 }
