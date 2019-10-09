@@ -32,28 +32,51 @@ export default class Cube {
 
   move() {
     if (this.canClick()) {
-      console.log('move start');
-      this.update();
-      console.log('move end');
-      this.board.game.changePlayer();
+      console.debug('move start');
+
+      this.update(this).then(() => {
+        console.debug('move end', this.updates);
+        this.board.game.changePlayer();
+      });
     }
   }
 
-  update() {
-    console.log('cube id', this.id);
-    this.player = this.board.game.currentPlayer;
-    this.value++;
-    this.render();
+  update(origin) {
+    return new Promise((resolve, reject) => {
+      const wait = this === origin ? 0 : 500;
+      this.el.classList.add("current");
+      setTimeout(() => {
+        this.player = this.board.game.currentPlayer;
+        this.value++;
+        console.debug('render', this.id);
+        this.render();
+        // console.debug('cube id', this.id, origin, origin == this);
 
-    if (this.board.game.isEnd()) { return; }
+        if (this.board.game.isEnd()) {
+          resolve();
+          return false;
+        }
 
-    if (this.overload()) { this.updateNeighbours(); }
-    this.render();
+        let promises = [];
+        if (this.isOverloaded) {
+          console.debug('isOverloaded');
+          promises = this.updateNeighbours(origin);
+          console.debug(promises);
+        }
+
+
+        Promise.all(promises).then(() => {
+          this.el.classList.remove("current");
+          this.render();
+          resolve();
+        });
+      }, wait);
+    });
   }
 
-  updateNeighbours() {
+  updateNeighbours(origin) {
     this.value = this.value - this.neighbours.length;
-    this.neighbours.forEach((cube) => cube.update());
+    return this.neighbours.map((cube) => cube.update(origin));
   }
 
   canClick() {
@@ -62,7 +85,7 @@ export default class Cube {
     return this.player === this.board.game.currentPlayer || !this.player;
   }
 
-  overload() {
+  get isOverloaded() {
     return this.value > this.maximumValue;
   }
 

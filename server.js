@@ -12,5 +12,10 @@ app.use(express.static(publicPath));
 app.use(webpackMiddleware(webpack(webpackConfig)));
 
 app.listen(port, () => {
+  console.log('**********************************');
   console.log(`Listening on port ${port}`);
+  console.log(`http://localhost:${port}`);
+  console.log(`http://127.0.0.1:${port}`);
+  console.log(`http://0.0.0.0:${port}`);
+  console.log('**********************************\n\n');
 });

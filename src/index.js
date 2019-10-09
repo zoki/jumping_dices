@@ -1,11 +1,13 @@
 import Game from './models/game';
 
 const game = new Game({
-  numPlayers: 2,
-  rows: 4,
-  cols: 4,
+  numPlayers: 3,
+  rows: 8,
+  cols: 8,
   includeBlank: false,
 });
+
+// game.loadState()
 
 document.body.appendChild(game.el);
 
