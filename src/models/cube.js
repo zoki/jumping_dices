@@ -92,7 +92,8 @@ export default class Cube {
   render() {
     this.el.classList.remove('player-1', 'player-2');
     if (this.value > 0) { this.el.classList.add(`player-${this.player}`); }
-    if (!this.blank) this.el.innerHTML = this.value.toString(10);
+    if (!this.blank) this.el.style.backgroundImage = `url(../images/dice-${this.value}.png)`;
+    //if (!this.blank) this.el.innerHTML = this.value.toString(10);
     // this.el.innerHTML = this.debug()
     return this;
   }
