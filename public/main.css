@@ -1,10 +1,10 @@
 :root {
   --color-0: whitesmoke;
   --color-1: #08C9DD;
-  --color-2: #5150EB;
-  --color-3: #F47171;
-  --color-4: #9B3535;
-  --color-5: #F7DF45;
+  --color-2: #F47171;
+  --color-3: #F7DF45;
+  --color-4: #359b46;
+  --color-5: #5150EB;
 
   --rows: 0;
   --cols: 0;
@@ -50,6 +50,8 @@ body {
   background: #ccc;
   transition: all 0.2s ease;
   user-select: none;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cube.blank {
@@ -61,11 +63,11 @@ body {
 }
 
 
-.cube.player-1 { background: var(--color-1); }
-.cube.player-2 { background: var(--color-2); }
-.cube.player-3 { background: var(--color-3); }
-.cube.player-4 { background: var(--color-4); }
-.cube.player-5 { background: var(--color-5); }
+.cube.player-1 { background-color: var(--color-1); }
+.cube.player-2 { background-color: var(--color-2); }
+.cube.player-3 { background-color: var(--color-3); }
+.cube.player-4 { background-color: var(--color-4); }
+.cube.player-5 { background-color: var(--color-5); }
 
 
 .cube.debug {
@@ -73,9 +75,8 @@ body {
   font-size: 12px;
   line-height: 16px;
   text-align: left;
-  /*background: #555;*/
 }
 
 .current{
-  background: #333 !important;
+  box-shadow: inset 0 0 30px rgba(50, 0, 0, .5);
 }
