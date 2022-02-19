@@ -1,9 +1,9 @@
 import Game from './models/game';
 
 const game = new Game({
-  numPlayers: 3,
-  rows: 8,
-  cols: 8,
+  numPlayers: 2,
+  rows: 5,
+  cols: 5,
   includeBlank: false,
 });
 
